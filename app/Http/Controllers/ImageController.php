@@ -18,9 +18,14 @@ class ImageController extends Controller
     public function index()
     {
         //
-
         $images = Image::all();
+//        if($images == null){
+//            return Inertia::render('Image/Index');
+//        }else{
+//            return Inertia::render('Image/Index', ['images'=>$images]);
+//        }
         return Inertia::render('Image/Index', ['images'=>$images]);
+
     }
 
     /**
@@ -44,16 +49,19 @@ class ImageController extends Controller
     {
         //
         $request->validate([
+            'title' => 'required',
+            'price' => 'required',
             'image'
         ]);
         dump($request);
-        $path = Storage::putFile($request->path(), $request->file('avatar'));
-
+        dump($request->get('id'));
+//        Image Path 구해오는방법
+        $path = $request->file('avatar')->store('avatars', 'public');
         Image::create([
+            'title' => $request->get('title'),
+            'price' => $request->get('price'),
             'image' => $path,
         ]);
-
-
     }
 
     /**

@@ -13,7 +13,6 @@
                 </Link>
             </div>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -28,8 +27,10 @@
                                                 제품번호
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-
-                                                제목
+                                                이미지
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                상품명
                                             </th>
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 가격
@@ -49,15 +50,25 @@
                                             </td>
                                         </tr>
                                         <tr v-for="image in images" :key="image.id">
+<!--                                            이미지 ID-->
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                 {{ image.id }}
                                             </td>
-<!--                                            이미지-->
+                                            <!--                                            이미지-->
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                               <img
-                                                   src="image.image"
-                                                   class="object-cover h-40 w-80"
-                                               />
+                                                <img
+                                                    :src="'/storage/' + image.image"
+                                                    class="object-cover h-40 w-80"
+                                                />
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                {{ image.title }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                {{ image.price }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                {{ image.created_at }}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -69,6 +80,7 @@
                 </div>
             </div>
         </div>
+
     </app-layout>
 </template>
 
@@ -90,12 +102,13 @@ export default {
 
     setup(props){
         console.log('이미지테스트');
-        console.log(props);
+        // console.log(props);
+        // console.log(props.images[0].image);
     },
 
     methods: {
         showImage(){
-            return "/storage/";
+            return "/image/";
         },
     },
 

@@ -5,16 +5,67 @@
                 ImageCreate
             </h1>
         </template>
-        <div>
-            <form @submit.prevent="submit">
-                <input type="file" @input="form.avatar = $event.target.files[0]" />
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <jet-form-section @submitted="createImage">
+                    <template #form>
+                        <!-- Title -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <jet-label for="title" value="상품명" />
+                            <jet-input
+                                id="title"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.title"
+                                autocomplete="title"
+                            />
+                            <jet-input-error :message="form.errors.title" class="mt-2" />
+                        </div>
 
-                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                    {{ form.progress.percentage }}%
-                </progress>
-                <button type="submit">Submit</button>
-            </form>
+                        <!-- price -->
+                        <div class="col-span-6 sm:col-span-4">
+                            <jet-label for="price" value="가격" />
+                            <jet-input
+                                id="price"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.price"
+                                autocomplete="price"
+                            />
+                            <jet-input-error :message="form.errors.price" class="mt-2" />
+                        </div>
+                        <div class="col-span-6 sm:col-span-4">
+                            <jet-label for="avatar" value="이미지" />
+                            <jet-input
+                                type="file"
+                                @input="form.avatar = $event.target.files[0]" />
+                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                {{ form.progress.percentage }}%
+                            </progress>
+                        </div>
+                    </template>
+
+                    <template #actions>
+                        <jet-action-message :on="form.recentlySuccessful" class="mr-3">
+                            Saved.
+                        </jet-action-message>
+
+                        <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            Save
+                        </jet-button>
+                    </template>
+
+                </jet-form-section>
+            </div>
         </div>
+<!--            <form @submit.prevent="submit">-->
+<!--                <input type="file" @input="form.avatar = $event.target.files[0]" />-->
+
+<!--                <progress v-if="form.progress" :value="form.progress.percentage" max="100">-->
+<!--                    {{ form.progress.percentage }}%-->
+<!--                </progress>-->
+<!--                <button type="submit">Submit</button>-->
+<!--            </form>-->
 
     </app-layout>
 </template>
@@ -22,21 +73,40 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout";
 import {useForm} from "@inertiajs/inertia-vue3";
+import JetFormSection from '@/Jetstream/FormSection.vue'
+import JetLabel from '@/Jetstream/Label.vue'
+import JetInput from '@/Jetstream/Input.vue'
+import JetInputError from '@/Jetstream/InputError.vue'
+import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+import JetButton from '@/Jetstream/Button.vue'
+
 export default {
     name: "Create",
     components: {
-        AppLayout
+        AppLayout,
+        JetFormSection,
+        JetLabel,
+        JetInput,
+        JetInputError,
+        JetActionMessage,
+        JetButton
     },
     setup(){
         const form = useForm({
             _method: 'POST',
+            title: '',
+            price: '',
             avatar: null,
         })
-
-        function submit(){
+        const createImage = ()=>{
             form.post(route("image.store"));
-        }
-        return {form, submit}
+        };
+        return {form, createImage}
+        // function submit(){
+        //     form.post(route("image.store"));
+        // }
+        // return {form, submit}
+
     },
 }
 </script>
