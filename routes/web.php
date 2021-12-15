@@ -34,4 +34,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('product', ProductController::class)
     ->middleware(['auth:sanctum', 'verified']);
 
+Route::resource('image', \App\Http\Controllers\ImageController::class)
+    ->middleware(['auth:sanctum', 'verified']);
+
+
+//컨트롤러 url 따로지정 하는 방법
+//Route::get('image', [ImageController::class,'index'])->name('image.index');
+//Route::get('image/create', [ImageController::class,'create'])->name('image.create');
+//Route::post('image', [ImageController::class,'store'])->name('image.store');
+
 

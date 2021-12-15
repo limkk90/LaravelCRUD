@@ -25,6 +25,9 @@
                                 <jet-nav-link :href="route('product.index')" :active="route().current('product.index')">
                                     Product
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('image.index')" :active="route().current('image.index')">
+                                    ImageProduct
+                                </jet-nav-link>
                             </div>
                         </div>
 

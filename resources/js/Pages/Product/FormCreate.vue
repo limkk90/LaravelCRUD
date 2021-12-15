@@ -58,7 +58,6 @@
                 </jet-form-section>
             </div>
         </div>
-
     </app-layout>
 </template>
 

@@ -1,13 +1,15 @@
 <template>
     <app-layout>
         <template #header>
-            <h1 class="text-center text-2xl font-bold leading-7 text-gray-300 sm:text-3xl sm:truncate py-4 bg-gradient-to-l from-indigo-500 to-indigo-800 ">Product</h1>
+            <h1 class="text-center text-2xl font-bold leading-7 text-gray-300 sm:text-3xl sm:truncate py-4 bg-gradient-to-l from-indigo-500 to-indigo-800 ">
+                ImageIndex
+            </h1>
             <div>
                 <Link
                     class="float-right"
-                    :href="route('product.create')"
+                    :href="route('image.create')"
                 >
-                    <jet-button>Create</jet-button>
+                    <jet-button>CREATE</jet-button>
                 </Link>
             </div>
         </template>
@@ -41,29 +43,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-if="!products">
-                                                <td class="p-4 text-center text-gray-900" colspan="5">
-                                                    데이터가 없습니다.
-                                                </td>
-                                            </tr>
-                                            <tr v-for="post in products" :key="post.id">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                        {{ post.id }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    <Link
-                                                        :href="route('product.show', post.id)"
-                                                        class="text-indigo-600 hover:text-indigo-900">
-                                                    {{ post.description}}
-                                                    </Link>
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ post.price }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ post.created_at }}
-                                                </td>
-                                            </tr>
+                                        <tr v-if="!images">
+                                            <td class="p-4 text-center text-gray-900" colspan="5">
+                                                데이터가 없습니다.
+                                            </td>
+                                        </tr>
+                                        <tr v-for="image in images" :key="image.id">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                {{ image.id }}
+                                            </td>
+<!--                                            이미지-->
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                               <img
+                                                   src="image.image"
+                                                   class="object-cover h-40 w-80"
+                                               />
+                                            </td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -81,7 +77,7 @@ import AppLayout from "../../Layouts/AppLayout";
 import {Link} from '@inertiajs/inertia-vue3';
 import JetButton from '@/JetStream/Button';
 export default {
-    name: "Mostrar",
+    name: "Index",
     components: {
         AppLayout,
         Link,
@@ -89,14 +85,19 @@ export default {
     },
 
     props: {
-        products: Array,
+        images: Array,
     },
 
     setup(props){
-        console.log('테스트');
+        console.log('이미지테스트');
         console.log(props);
-    }
+    },
 
+    methods: {
+        showImage(){
+            return "/storage/";
+        },
+    },
 
 }
 </script>
@@ -104,3 +105,4 @@ export default {
 <style scoped>
 
 </style>
+
