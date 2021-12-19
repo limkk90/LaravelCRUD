@@ -67,6 +67,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
+<!--                                    <pagination class="mt-6" :links="products.links" />-->
                                 </div>
                             </div>
                         </div>
@@ -81,16 +82,18 @@
 import AppLayout from "../../Layouts/AppLayout";
 import {Link} from '@inertiajs/inertia-vue3';
 import JetButton from '@/JetStream/Button';
+import Pagination from "@/Components/Pagination";
 export default {
     name: "Mostrar",
     components: {
         AppLayout,
         Link,
-        JetButton
+        JetButton,
+        Pagination
     },
 
     props: {
-        products: Array,
+        products: Object,
     },
 
     setup(props){

@@ -29,6 +29,7 @@
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 이미지
                                             </th>
+
                                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 상품명
                                             </th>
@@ -62,7 +63,11 @@
                                                 />
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                <Link
+                                                    :href="route('image.show', image.id)"
+                                                    class="text-indigo-600 hover:text-indigo-900">
                                                 {{ image.title }}
+                                                </Link>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                 {{ image.price }}
@@ -88,12 +93,13 @@
 import AppLayout from "../../Layouts/AppLayout";
 import {Link} from '@inertiajs/inertia-vue3';
 import JetButton from '@/JetStream/Button';
+
 export default {
     name: "Index",
     components: {
         AppLayout,
         Link,
-        JetButton
+        JetButton,
     },
 
     props: {

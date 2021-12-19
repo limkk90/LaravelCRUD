@@ -21,13 +21,23 @@
                         <!--          디스크립션-->
                         <div class="col-span-6 sm:col-span-4">
                             <jet-label for="description" value="Title" />
-                            <jet-input id="description" type="text" class="mt-1 block w-full" v-model="form.description" autocomplete="description" />
+                            <jet-input
+                                id="description"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.description"
+                                autocomplete="description" />
                             <jet-input-error :message="form.errors.description" class="mt-2" />
                         </div>
                         <!--        가격-->
                         <div class="col-span-6 sm:col-span-4">
                             <jet-label for="price" value="Price" />
-                            <jet-input id="price" type="text" class="mt-1 block w-full" v-model="form.price" autocomplete="price" />
+                            <jet-input
+                                id="price"
+                                type="text"
+                                class="mt-1 block w-full"
+                                v-model="form.price"
+                                autocomplete="price" />
                             <jet-input-error :message="form.errors.price" class="mt-2" />
                         </div>
                     </template>

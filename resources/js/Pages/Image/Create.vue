@@ -58,6 +58,7 @@
                 </jet-form-section>
             </div>
         </div>
+<!--        원래 쓰던 이미지업로드코드-->
 <!--            <form @submit.prevent="submit">-->
 <!--                <input type="file" @input="form.avatar = $event.target.files[0]" />-->
 
@@ -102,6 +103,7 @@ export default {
             form.post(route("image.store"));
         };
         return {form, createImage}
+
         // function submit(){
         //     form.post(route("image.store"));
         // }

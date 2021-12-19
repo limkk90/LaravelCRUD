@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
 
@@ -18,8 +19,9 @@ class ProductController extends Controller
     {
         ////        이렇게 보내면 Array타입으로 날라가는 듯
         $products = Product::all();
+
+//        $products = DB::table('products')->paginate(5);
 //        dump($products);
-//        이렇게 보내면 Array타입으로 날라가는 듯
         return Inertia::render('Product/Mostrar', ['products'=>$products]);
     }
 
@@ -87,6 +89,10 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //DB수정 시킴
+        //description
+        //price
+        dump($request->get('description'));
+        dump($request->get('price'));
         $product->update($request->all());
         return Redirect::route('product.index');
     }

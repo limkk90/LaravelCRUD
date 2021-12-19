@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
@@ -18,12 +19,12 @@ class ImageController extends Controller
     public function index()
     {
         //
+//        $images = DB::table('images')->paginate(1);
+//        dump($images);
+
+//        원래쓰던 db all()
         $images = Image::all();
-//        if($images == null){
-//            return Inertia::render('Image/Index');
-//        }else{
-//            return Inertia::render('Image/Index', ['images'=>$images]);
-//        }
+
         return Inertia::render('Image/Index', ['images'=>$images]);
 
     }
@@ -54,7 +55,6 @@ class ImageController extends Controller
             'image'
         ]);
         dump($request);
-        dump($request->get('id'));
 //        Image Path 구해오는방법
         $path = $request->file('avatar')->store('avatars', 'public');
         Image::create([
@@ -62,6 +62,9 @@ class ImageController extends Controller
             'price' => $request->get('price'),
             'image' => $path,
         ]);
+        //$request->get('title'),
+        //$request->get('price'),
+        // Index.vue에서 <jet-input>에 id로 적어준 것임
     }
 
     /**
@@ -73,6 +76,7 @@ class ImageController extends Controller
     public function show(Image $image)
     {
         //
+        return Inertia::render('Image/Show', ['images'=>$image]);
     }
 
     /**
@@ -84,6 +88,7 @@ class ImageController extends Controller
     public function edit(Image $image)
     {
         //
+        return Inertia::render('Image/ImageEdit', ['image'=>$image]);
     }
 
     /**
@@ -96,6 +101,22 @@ class ImageController extends Controller
     public function update(Request $request, Image $image)
     {
         //
+//        dump($image->getAttribute('image'));
+        dump($request->get('title'));
+        dump($request->get('price'));
+        dump($request->file('avatar'));
+        dump($request);
+
+//라라벨은 이렇게 getAttribute하는듯
+//        Storage::delete($image->getAttribute('image'));
+
+        $path = $request->file('avatar')->store('avatars', 'public');
+//        Image::update([
+//            'title' => $request->get('title'),
+//            'price' => $request->get('price'),
+//            'image' => $path,
+//        ]);
+//        return Redirect::route('image.index');
     }
 
     /**
@@ -107,5 +128,8 @@ class ImageController extends Controller
     public function destroy(Image $image)
     {
         //
+        Storage::delete($image->getAttribute('image'));
+        $image->delete();
+        return Redirect::route('image.index');
     }
 }
