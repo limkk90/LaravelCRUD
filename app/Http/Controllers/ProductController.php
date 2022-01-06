@@ -106,6 +106,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         // 삭제
+        dump($product);
         $product->delete();
         return Redirect::route('product.index');
     }

@@ -111,12 +111,14 @@ class ImageController extends Controller
 //        Storage::delete($image->getAttribute('image'));
 
         $path = $request->file('avatar')->store('avatars', 'public');
-//        Image::update([
-//            'title' => $request->get('title'),
-//            'price' => $request->get('price'),
-//            'image' => $path,
-//        ]);
-//        return Redirect::route('image.index');
+//        터지면 여기서 부터 주석
+        Image::update([
+            'title' => $request->get('title'),
+            'price' => $request->get('price'),
+            'image' => $path,
+        ]);
+        return Redirect::route('image.index');
+//        이까지
     }
 
     /**
