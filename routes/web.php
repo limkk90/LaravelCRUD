@@ -37,6 +37,8 @@ Route::resource('product', ProductController::class)
 Route::resource('image', \App\Http\Controllers\ImageController::class)
     ->middleware(['auth:sanctum', 'verified']);
 
+Route::get('/axiosReceiver/test', [\App\Http\Controllers\ReceiverAxiosController::class,'index']);
+
 
 //컨트롤러 url 따로지정 하는 방법
 //Route::get('image', [ImageController::class,'index'])->name('image.index');
